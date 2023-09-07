@@ -347,7 +347,6 @@
 
     .dropdown:focus>.dropdown-content,
     .dropdown:focus-within .dropdown-content {
-      display: block;
       -webkit-animation: fadeIn 1s;
       animation: fadeIn 1s;
     }
