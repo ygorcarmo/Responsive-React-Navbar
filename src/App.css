@@ -135,14 +135,18 @@
 }
 
 @layer nav {
+  .navbar {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
   #top {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
     gap: 1.5rem;
     font-family: var(--cursive);
-    max-width: 1200px;
-    margin: 2rem auto;
+    margin: 2rem 2rem;
   }
 
   #top>nav>ul {
@@ -231,11 +235,6 @@
 
 
   @media (max-width: 600px) {
-    #top {
-      margin: 4rem 2rem;
-
-    }
-
     .bandname {
       display: none;
     }
@@ -349,7 +348,6 @@
     .dropdown:focus>.dropdown-content,
     .dropdown:focus-within .dropdown-content {
       display: block;
-      visibility: visible;
       -webkit-animation: fadeIn 1s;
       animation: fadeIn 1s;
     }

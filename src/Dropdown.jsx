@@ -1,60 +1,44 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function Dropdown() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [dropdownContent, setDropdownContent] = useState(null);
-  const checkDevice = () => {
-    if (
-      navigator.userAgent.match(/Android/i) ||
-      navigator.userAgent.match(/webOS/i) ||
-      navigator.userAgent.match(/iPhone/i) ||
-      navigator.userAgent.match(/iPad/i) ||
-      navigator.userAgent.match(/iPod/i) ||
-      navigator.userAgent.match(/BlackBerry/i) ||
-      navigator.userAgent.match(/Windows Phone/i)
-    ) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
+  const onclick = () => {
+    if (window.matchMedia("(max-width: 767px)").matches) {
+      document.addEventListener("click", (e) => {
+        const dropdownContent = document.querySelector(".dropdown-content");
+        console.log(e.target.classList.contains("stay-open"));
+
+        if (!isDropdownOpen && e.target.classList.contains("stay-open")) {
+          dropdownContent.style.display = "block";
+          setIsDropdownOpen(true);
+        } else {
+          dropdownContent.style.display = "none";
+          setIsDropdownOpen(false);
+        }
+      });
     }
   };
-  useEffect(() => {
-    checkDevice();
-    if (isMobile) {
-      setDropdownContent(document.querySelector(".dropdown-content"));
-    }
-  }, []);
 
   return (
-    <li className="dropdown">
-      <a
-        href="#"
-        className="dropdown-title"
-        onClick={(e) => {
-          e.preventDefault();
-          if (isMobile) {
-            if (!isDropdownOpen) {
-              dropdownContent.style.display = "block";
-              setIsDropdownOpen(true);
-            } else {
-              dropdownContent.style.display = "none";
-              setIsDropdownOpen(false);
-            }
-          }
-        }}
-      >
+    <li className="dropdown stay-open">
+      <a href="#" className="dropdown-title stay-open" onClick={onclick}>
         Tour
       </a>
-      <ul className="dropdown-content">
+      <ul className="dropdown-content stay-open">
         <li>
-          <a href="#">Link 1</a>
+          <a href="#" className="stay-open">
+            Link 1
+          </a>
         </li>
         <li>
-          <a href="#">Link 2</a>
+          <a href="#" className="stay-open">
+            Link 2
+          </a>
         </li>
         <li>
-          <a href="#">Link 3</a>
+          <a href="#" className="stay-open">
+            Link 3
+          </a>
         </li>
       </ul>
     </li>
