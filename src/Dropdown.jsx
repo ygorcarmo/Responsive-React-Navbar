@@ -4,24 +4,31 @@ export default function Dropdown() {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [dropdownContent, setDropdownContent] = useState(null);
 
+  const hideDropdownContent = () => {
+    dropdownContent.style.display = "none";
+    setDropdownOpen(false);
+  };
+  const showDropdownContent = () => {
+    dropdownContent.style.display = "block";
+    setDropdownOpen(true);
+  };
+
   useEffect(() => {
+    setDropdownContent(document.querySelector(".dropdown-content"));
+    // close the dropdown content when user presses something other than the dropdown title on mobile
     document.addEventListener("click", (e) => {
-      setDropdownContent(document.querySelector(".dropdown-content"));
       if (isDropdownOpen && !e.target.classList.contains("dropdown-title")) {
-        dropdownContent.style.display = "none";
-        setDropdownOpen(false);
+        hideDropdownContent();
       }
     });
   }, [isDropdownOpen]);
 
   const openOrClosedDropdown = () => {
     if (window.matchMedia("(max-width: 767px)").matches) {
-      if (!isDropdownOpen) {
-        dropdownContent.style.display = "block";
-        setDropdownOpen(true);
+      if (isDropdownOpen) {
+        hideDropdownContent();
       } else {
-        dropdownContent.style.display = "none";
-        setDropdownOpen(false);
+        showDropdownContent();
       }
     }
   };
