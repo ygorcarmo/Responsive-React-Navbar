@@ -16,11 +16,19 @@ export default function Dropdown() {
   useEffect(() => {
     setDropdownContent(document.querySelector(".dropdown-content"));
     // close the dropdown content when user presses something other than the dropdown title on mobile
-    document.addEventListener("click", (e) => {
+
+    // Which version is better?
+    // document.addEventListener("click", (e) => {
+    //   if (isDropdownOpen && !e.target.classList.contains("dropdown-title")) {
+    //     hideDropdownContent();
+    //   }
+    // });
+
+    document.onclick = (e) => {
       if (isDropdownOpen && !e.target.classList.contains("dropdown-title")) {
         hideDropdownContent();
       }
-    });
+    };
   }, [isDropdownOpen]);
 
   const openOrClosedDropdown = () => {
